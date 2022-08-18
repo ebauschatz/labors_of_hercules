@@ -1,3 +1,5 @@
+from enum import Enum
+
 class Hero:
     def __init__(self, name, max_health, attacks):
         self.name = name
@@ -13,7 +15,6 @@ class Monster:
         self.attacks = attacks
         self.immunities = immunities
 
-#enum for damage_type?
 class Attack:
     def __init__(self, name, damage_type, damage_amount, is_lethal):
         self.name = name
@@ -26,3 +27,11 @@ class Location:
         self.name = name
         self.description = description
         self.monsters = monsters
+
+class DamageType(Enum):
+    PIERCE = 1
+    SLASH = 2
+    BLUDGEON = 3
+    POISON = 4
+    LOVE = 5
+    GRAPPLE = 6
