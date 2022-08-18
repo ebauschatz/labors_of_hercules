@@ -6,15 +6,14 @@ class Hero:
         self.attacks = attacks
 
 class Monster:
-    def __init__(self, name, max_health, attacks, immunities, location):
+    def __init__(self, name, max_health, attacks, immunities):
         self.name = name
         self.max_health = max_health
         self.current_health = max_health
         self.attacks = attacks
         self.immunities = immunities
-        self.location = location
 
-#enum for damage_type
+#enum for damage_type?
 class Attack:
     def __init__(self, name, damage_type, damage_amount, is_lethal):
         self.name = name
@@ -23,6 +22,7 @@ class Attack:
         self.is_lethal = is_lethal
 
 class Location:
-    def __init__(self, name, description):
+    def __init__(self, name, description, monsters):
         self.name = name
         self.description = description
+        self.monsters = monsters
