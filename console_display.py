@@ -25,6 +25,12 @@ def display_attack_names(attacks):
     attack_names = [x.name for x in attacks]
     display_all_list_options(attack_names)
 
+def display_attack_failed(failure_reason):
+    print(f'\nThe attack did no damage because {failure_reason}.')
+
+def display_battle_won(opponent_name, victory_action):
+    print(f'\nVictory! You have {victory_action} {opponent_name}!')
+
 def display_location_options(available_locations):
     print('\nYou can go to the following areas:')
     display_all_list_options(available_locations)

@@ -25,9 +25,10 @@ def run_location_encounter(location, hero):
     if location.encounter_type == LocationEncounterType.REST:
         restore_all_health(hero)
         return
-    current_monster = select_current_monster(location.monsters)
-    console_display.display_entity_encountered(current_monster.name)
-    run_monster_battle(current_monster, hero)
+    elif location.encounter_type == LocationEncounterType.BATTLE:
+        current_monster = select_current_monster(location.monsters)
+        console_display.display_entity_encountered(current_monster.name)
+        run_monster_battle(current_monster, hero)
 
 def select_current_monster(available_monsters):
     return available_monsters[0]
@@ -44,16 +45,20 @@ def get_available_attacks(all_attacks, attack_is_lethal):
     return [x for x in all_attacks if x.is_lethal is attack_is_lethal]
 
 def attack(hero, hero_attacks, monster, monster_attacks):
-    console_display.display_health_percentage(hero.name, hero.max_health, hero.current_health)
-    console_display.display_health_percentage(monster.name, monster.max_health, monster.current_health)
-    console_display.display_attack_names(hero_attacks)
-    #todo: input validation
-    selected_attack_index = int(input('Please enter the number of the attack you wish to make: '))
-    selected_attack = hero_attacks[selected_attack_index]
-    apply_attack(selected_attack, monster)
+    while monster.current_health > 0:
+        console_display.display_health_percentage(hero.name, hero.max_health, hero.current_health)
+        console_display.display_health_percentage(monster.name, monster.max_health, monster.current_health)
+        console_display.display_attack_names(hero_attacks)
+        #todo: input validation
+        selected_attack_index = int(input('Please enter the number of the attack you wish to make: ')) - 1
+        selected_attack = hero_attacks[selected_attack_index]
+        if selected_attack.damage_type in monster.immunities:
+            console_display.display_attack_failed(f'{monster.name} is immune to this attack')
+            continue
+        apply_attack(selected_attack, monster)
+    console_display.display_battle_won(monster.name, 'defeated') #change to 'slain' or 'tamed' based on battle type
 
 def apply_attack(attack, target):
     target.current_health -= attack.damage_amount
-    console_display.display_health_percentage(target.name, target.max_health, target.current_health)
 
 main()
