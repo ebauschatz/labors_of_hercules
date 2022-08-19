@@ -4,26 +4,42 @@ hero = Hero(
     name = 'Hercules',
     max_health = 30,
     attacks = [
-        Attack('Stab With Spear', DamageType.PIERCE, 5, True),
-        Attack('Cut With Sword', DamageType.SLASH, 5, True),
+        Attack('Spear', DamageType.PIERCE, 5, True),
+        Attack('Sword', DamageType.SLASH, 5, True),
         Attack('Wrestle', DamageType.GRAPPLE, 3, True),
-        Attack('Hit with Club',DamageType.BLUDGEON, 4, True),
+        Attack('Club',DamageType.BLUDGEON, 4, True),
         Attack('Pet', DamageType.LOVE, 5, False),
         Attack('Play Fetch', DamageType.LOVE, 4, False),
         Attack('Compliment', DamageType.LOVE, 3, False),
         Attack('Give Treat', DamageType.LOVE, 5, False)
     ])
 
+camp_description = '''You have a very comfortable camp bed set up, and after a tasty meal you decide to get a good night's rest. 
+    Tomorrow there will be more adventures!'''
+
+tall_grass_description = '''The vegetation in this area is dense and coarse.
+    It's almost impossible to see anything below the serenely waving tops of the grasses that graze your shoulders.
+    What's that rustling noise?'''
+
+swamp_description = '''It smells wet and musty, and with every step you sink into mud up to your shins. 
+    The trees are covered with thick dripping vines that block out most of the sunlight.
+    Did something just move in the water?'''
+
+underworld_gates_description = '''A thick stone doorway stands alone near a river.
+    Looking through the open arch, you see endless stairs leading down into a dark tunnel.
+    Strangely, if you walk around the other side of the arch, the stairs aren't there.
+    Why does it suddenly feel like you're being watched?'''
+
 all_locations = [
     Location(
         name = 'your Overnight Camp',
-        description = 'base for resting and recovery',
+        description = camp_description,
         encounter_type = LocationEncounterType.REST,
         monsters = []
     ),
     Location(
         name = 'the Tall Grass',
-        description = 'fancy words about very tall grass',
+        description = tall_grass_description,
         encounter_type = LocationEncounterType.BATTLE,
         monsters = [Monster(
             name = 'the Nemean Lion',
@@ -38,7 +54,7 @@ all_locations = [
     ),
     Location(
         name = 'the Dark Swamp',
-        description = 'v wet and slimy',
+        description = swamp_description,
         encounter_type = LocationEncounterType.BATTLE,
         monsters = [Monster(
             name = 'the Lernaean Hydra',
@@ -54,7 +70,7 @@ all_locations = [
     ),
     Location(
         name = 'the Gates Of The Underworld',
-        description = 'creepy but also cool',
+        description = underworld_gates_description,
         encounter_type = LocationEncounterType.BATTLE,
         monsters = [Monster(
             name = 'Cerberus',

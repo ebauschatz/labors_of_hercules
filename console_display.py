@@ -21,7 +21,7 @@ def display_all_health_percentages(entities):
         display_health_percentage(entity.name, entity.max_health, entity.current_health, False)
 
 def display_full_health_restored(entity):
-    print(f'\nAll health for {entity.name} has been restored!')
+    print(f'All health for {entity.name} has been restored!')
 
 def display_all_list_options(options_list):
     for index, location in enumerate(options_list):
@@ -32,11 +32,18 @@ def display_attack_names(attacks):
     attack_names = [x.name for x in attacks]
     display_all_list_options(attack_names)
 
+def display_attack_succeeded(attack_name, attacker_name):
+    print(f'\n{attacker_name[0].upper() + attacker_name[1:]} attacks!')
+    print(f'The {attack_name.lower()} attack succeeded!')
+
 def display_attack_failed(failure_reason):
     print(f'\nThe attack did no damage because {failure_reason}.')
 
 def display_battle_won(opponent_name, victory_action):
     print(f'\nVictory! You have {victory_action} {opponent_name}!')
+
+def display_battle_lost(opponent_name):
+    print(f'\nYou have been defeated by {opponent_name}! You manage to escape and dedcide to rest before trying again.')
 
 def display_location_options(available_locations):
     print('\nYou can go to the following areas:')
@@ -47,4 +54,4 @@ def display_entering_location(location):
     {location.description}''')
 
 def display_entity_encountered(entity_name):
-    print(f'\nYou encountered {entity_name}!')
+    print(f'\nYou encounter {entity_name}!')

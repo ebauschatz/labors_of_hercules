@@ -36,7 +36,7 @@ def run_location_encounter(location, hero):
             console_display.display_battle_won(current_monster.name, 'defeated') #change to 'slain' or 'tamed' based on battle type
             location.monsters.remove(current_monster)
         else:
-            print('Go home and rest')
+            console_display.display_battle_lost(current_monster.name)
             restore_all_health(hero)
             restore_all_health(current_monster)
 
@@ -45,9 +45,7 @@ def select_current_monster(available_monsters):
 
 def complete_location_encounter_aftermath(locations):
     for location in locations:
-        if location.encounter_type == LocationEncounterType.REST:
-            continue
-        elif location.encounter_type == LocationEncounterType.BATTLE and len(location.monsters) == 0:
+        if location.encounter_type == LocationEncounterType.BATTLE and len(location.monsters) == 0:
             locations.remove(location)
 
 main()

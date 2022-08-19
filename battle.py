@@ -16,25 +16,36 @@ def get_available_attacks(all_attacks, attack_is_lethal):
 def attack(hero, hero_attacks, opponent, opponent_attacks):
     while opponent.current_health > 0 and hero.current_health > 0:
         console_display.display_all_health_percentages([hero, opponent])
-        #hero attack
-        console_display.display_attack_names(hero_attacks)
-        #todo: input validation
-        selected_attack_index = int(input('Please enter the number of the attack you wish to make: ')) - 1
-        selected_attack = hero_attacks[selected_attack_index]
-        if selected_attack.damage_type in opponent.immunities:
-            console_display.display_attack_failed(f'{opponent.name} is immune to this attack')
-            continue
-        apply_attack(selected_attack, opponent)
+        hero_attack(hero.name, hero_attacks, opponent)        
         if opponent.current_health <= 0:
             return True
-        #opponent attack
-        selected_attack = select_random_attack(opponent_attacks)
-        apply_attack(selected_attack, hero)
+        opponent_attack(opponent.name, opponent_attacks, hero)        
         if hero.current_health <= 0:
             return False
 
+def hero_attack(hero_name, hero_attacks, target):
+    selected_attack = select_attack(hero_attacks)
+    if selected_attack.damage_type in target.immunities:
+        console_display.display_attack_failed(f'{target.name} is immune to this attack')
+    else:
+        console_display.display_attack_succeeded(selected_attack.name, hero_name)
+        apply_attack(selected_attack, target)
+
+def opponent_attack(opponent_name, opponent_attacks, target):
+    selected_attack = select_random_attack(opponent_attacks)
+    console_display.display_attack_succeeded(selected_attack.name, opponent_name)
+    apply_attack(selected_attack, target)
+
 def apply_attack(attack, target):
     target.current_health -= attack.damage_amount
+
+def select_attack(attack_options):
+    valid_attack_selected = False
+    while valid_attack_selected is False:
+        console_display.display_attack_names(attack_options)
+        #todo: input validation 
+        selected_attack_index = int(input('Please enter the number of the attack you wish to make: ')) - 1
+        return attack_options[selected_attack_index]
 
 def select_random_attack(attack_options):
     return random.choice(attack_options)
