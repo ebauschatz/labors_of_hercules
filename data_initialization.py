@@ -1,4 +1,4 @@
-from data_models import Hero, Monster, Attack, Location, DamageType
+from data_models import Hero, Monster, Attack, Location, DamageType, LocationEncounterType
 
 hero = Hero(
     name = 'Hercules',
@@ -16,13 +16,15 @@ hero = Hero(
 
 all_locations = [
     Location(
-        name = 'Overnight Camp',
+        name = 'your Overnight Camp',
         description = 'base for resting and recovery',
+        encounter_type = LocationEncounterType.REST,
         monsters = []
     ),
     Location(
-        name = 'Tall Grass',
+        name = 'the Tall Grass',
         description = 'fancy words about very tall grass',
+        encounter_type = LocationEncounterType.BATTLE,
         monsters = [Monster(
             name = 'the Nemean Lion',
             max_health = 30,
@@ -30,12 +32,14 @@ all_locations = [
                 Attack('Bite', DamageType.PIERCE, 3, True),
                 Attack('Claw', DamageType.SLASH, 2, True)
             ],
-            immunities = [DamageType.PIERCE, DamageType.SLASH]
+            immunities = [DamageType.PIERCE, DamageType.SLASH, DamageType.LOVE],
+            is_lethal = True
         )]
     ),
     Location(
-        name = 'Dark Swamp',
+        name = 'the Dark Swamp',
         description = 'v wet and slimy',
+        encounter_type = LocationEncounterType.BATTLE,
         monsters = [Monster(
             name = 'the Lernaean Hydra',
             max_health = 30,
@@ -44,12 +48,14 @@ all_locations = [
                 Attack('Tail Whip', DamageType.BLUDGEON, 2, True),
                 Attack('Poison Breath', DamageType.POISON, 2, True),
             ],
-            immunities = [DamageType.POISON, DamageType.GRAPPLE]
+            immunities = [DamageType.POISON, DamageType.GRAPPLE, DamageType.LOVE],
+            is_lethal = True
         )]
     ),
     Location(
-        name = 'Gates Of The UnderWorld',
+        name = 'the Gates Of The Underworld',
         description = 'creepy but also cool',
+        encounter_type = LocationEncounterType.BATTLE,
         monsters = [Monster(
             name = 'Cerberus',
             max_health = 30,
@@ -57,7 +63,8 @@ all_locations = [
                 Attack('Sloppy Face Licks', DamageType.LOVE, 3, False),
                 Attack('Sad Puppy Eyes', DamageType.LOVE, 4, False)
             ],
-            immunities = []
+            immunities = [],
+            is_lethal = False
         )]
     )
 ]
