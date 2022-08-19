@@ -9,9 +9,16 @@ def display_closing_message():
     print('''\nCongratulations on completing the game!
     All of your enemies have been defeated (or befriended) and there is peace in all the land!''')
 
-def display_health_percentage(entity_name, max_health, current_health):
+def display_health_percentage(entity_name, max_health, current_health, display_with_newline = False):
+    if display_with_newline is True:
+        print()
     health_percentage = int(math.ceil(current_health / max_health * 100))
-    print(f'\nThe current health of {entity_name} is: {health_percentage}%')
+    print(f'The current health of {entity_name} is: {health_percentage}%')
+
+def display_all_health_percentages(entities):
+    print()
+    for entity in entities:
+        display_health_percentage(entity.name, entity.max_health, entity.current_health, False)
 
 def display_full_health_restored(entity):
     print(f'\nAll health for {entity.name} has been restored!')
